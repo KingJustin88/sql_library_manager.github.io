@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  header
+    h1 Books
+
+  form(method='get' action='/books')
+    a.button(href='/books/new' style='margin-left: 5px') Create New Book
+
+  p
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+      each book in books
+        tr
+          td
+            a(href=`/books/${book.id}`) #{book.title}
+          td= book.author
+          td= book.genre
+          td= book.year
+  
+  
