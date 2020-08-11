@@ -22,25 +22,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/books', books);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  res.render('books/page-not-found', {title: "Page Not Found"})
+// global 404 error handler
+app.use('/', (req, res, next) => {
+  console.log('Global 404 error handler called')
+  res.status(404).render('books/page-not-found', {title: "Page Not Found"})
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500); 
-  res.render('error');
-});
-
-// renders page-not-found for non-existent route
-app.use('/', (req, res) => {
-  res.render('page-not-found', {title: "Page Not Found"})
+// globabl non-existent book id error handler
+app.use((err, req, res, next) => {  
+  console.log('Global non-existent book id error handler called')
+  res.status(404).render('books/route-error', {title: "Error"});
 });
 
 

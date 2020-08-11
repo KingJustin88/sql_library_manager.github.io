@@ -24,19 +24,13 @@ module.exports = (sequelize) => {
         },
         genre: {
             type: Sequelize.STRING,
-            validate: {
-                notEmpty: {
-                    msg: 'Genre is required'
-                }
-            }
+            required: false,
+            allowNull: true
         }, 
         year: {
             type: Sequelize.INTEGER,
-            validate: {
-                notEmpty: {
-                    msg: 'Year is required'
-                }
-            }
+            required: false,
+            allowNull: true
         }
     },{ sequelize });
 
